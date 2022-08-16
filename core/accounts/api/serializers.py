@@ -7,3 +7,8 @@ User = get_user_model()
 class EmailLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
+
+
+class UsernameLoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
