@@ -17,11 +17,14 @@ class EmailLogin(generics.GenericAPIView):
         if serializer.is_valid():
             email = serializer.validated_data['email']
             password = serializer.validated_data['password']
-            print(email, password)
             user = get_object_or_404(User, email=email)
-            token, created = Token.objects.get_or_create(user=user)
-            data = {'token': token.key, 'user_id': user.pk,}
-            return Response(data, status=status.HTTP_200_OK)
+            if user.password == password:
+                token, created = Token.objects.get_or_create(user=user)
+                data = {'token': token.key, 'user_id': user.pk, 'created': created}
+                return Response(data, status=status.HTTP_200_OK)
+            else:
+                data = {'message' : "password is incorrect."}
+                return Response(data, status=status.HTTP_403_FORBIDDEN)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
