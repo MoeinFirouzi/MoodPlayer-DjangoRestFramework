@@ -12,6 +12,11 @@ User = get_user_model()
 
 
 class EmailLogin(generics.GenericAPIView):
+    """
+    Login users with Email.
+    Returns token if successful with 200 status code,
+    else returns errors with 400 status code.
+    """
     serializer_class = EmailLoginSerializer
 
     def post(self, request, *args, **kwargs):
@@ -33,6 +38,11 @@ class EmailLogin(generics.GenericAPIView):
 
 
 class UsernameLogin(generics.GenericAPIView):
+    """
+    Login users with Username.
+    Returns token if successful with 200 status code,
+    else returns errors with 400 status code.
+    """
     serializer_class = UsernameLoginSerializer
 
     def post(self, request, *args, **kwargs):
@@ -55,7 +65,7 @@ class UsernameLogin(generics.GenericAPIView):
 
 class SignUp(generics.GenericAPIView):
     """
-    Create a user by giving 'username', 'email' and 'password'
+    Create a user by giving 'username', 'email' and 'password',
     then returns its auth token.
     """
     serializer_class = UserSignUpSerializer
