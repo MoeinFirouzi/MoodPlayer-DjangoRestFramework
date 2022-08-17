@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'accounts',
+    'player',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
