@@ -40,7 +40,7 @@ class UploadMusicSerializer( serializers.ModelSerializer):
             
         album_instance, created = Album.objects.get_or_create(name=validated_data['album'])
         if created:
-            album_instance.artist_image = validated_data.get('album_image')
+            album_instance.album_image = validated_data.get('album_image')
             album_instance.save()
             
         validated_data.pop('artist', None)
