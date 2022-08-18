@@ -1,15 +1,14 @@
 from rest_framework import serializers
 from ..models import Music, Album, Artist
-from drf_writable_nested import WritableNestedModelSerializer
 
 
-class AlbumSerializer(WritableNestedModelSerializer, serializers.ModelSerializer):
+class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Album
         fields = '__all__'
 
 
-class ArtistSerializer(WritableNestedModelSerializer, serializers.ModelSerializer):
+class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
         fields = '__all__'
@@ -31,13 +30,13 @@ class UploadMusicSerializer(serializers.ModelSerializer):
         artist_instance, created = Artist.objects.get_or_create(
             name=validated_data['artist'])
 
-        if created:
+        if created or validated_data.get('artist_image'):
             artist_instance.artist_image = validated_data.get('artist_image')
             artist_instance.save()
 
         album_instance, created = Album.objects.get_or_create(
             name=validated_data['album'])
-        if created:
+        if created or validated_data.get('album_image'):
             album_instance.album_image = validated_data.get('album_image')
             album_instance.save()
 

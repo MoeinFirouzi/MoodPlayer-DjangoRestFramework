@@ -11,6 +11,11 @@ class UploadMusic(generics.GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'message': serializer.data}, status=status.HTTP_200_OK)
+            data = {'message': "Music has uploaded successfully", 'id': serializer.data.get('id')}
+            return Response(data, status=status.HTTP_200_OK)
         else:
             return Response({'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# class GetMusicDataList(generics.ListAPIView):
+#     serializer_class = 
