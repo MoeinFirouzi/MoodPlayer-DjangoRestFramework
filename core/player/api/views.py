@@ -47,11 +47,15 @@ class MusicRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Music.objects.all()
 
 
-class GetArtistList(generics.ListAPIView):
+class ArtistListCreateAPIView(generics.ListCreateAPIView):
     """
+    'POST':
     Return list of Artists in Database.
     If 'id' parameter exists, then it will return a list of objects
     that their id are in 'id' parameter.
+    
+    'POST':
+    Create an Artist instance.
     """
     serializer_class = ArtistSerializer
 
@@ -67,11 +71,15 @@ class GetArtistList(generics.ListAPIView):
         return queryset
 
 
-class GetAlbumList(generics.ListAPIView):
+class AlbumListCreateAPIView(generics.ListCreateAPIView):
     """
+    'GET':
     Return list of Albums in Database.
     If 'id' parameter exists, then it will return a list of objects
     that their id are in 'id' parameter.
+    
+    'POST':
+    Create an Album instance.
     """
     serializer_class = AlbumSerializer
 
