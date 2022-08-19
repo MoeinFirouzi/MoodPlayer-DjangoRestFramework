@@ -1,7 +1,9 @@
 from django.urls import path
 from .api.views import (UploadMusic, GetMusicDataList, ArtistListCreateAPIView,
                         AlbumListCreateAPIView, SearchMusicByName,
-                        MusicRetrieveUpdateDestroyAPIView)
+                        MusicRetrieveUpdateDestroyAPIView, AlbumRetrieveUpdateDestroyAPIView,
+                        ArtistRetrieveUpdateDestroyAPIView)
+
 urlpatterns = [
     path('upload-music/', UploadMusic.as_view(), name="upload_music"),
     path('music/<int:pk>/',
@@ -10,4 +12,8 @@ urlpatterns = [
     path('artist/', ArtistListCreateAPIView.as_view(), name="artist_list_create"),
     path('album/', AlbumListCreateAPIView.as_view(), name="album_list_create"),
     path('music/search/', SearchMusicByName.as_view(), name="search_music"),
+    path('artist/<int:pk>/', ArtistRetrieveUpdateDestroyAPIView.as_view(),
+         name="artist_RUD"),
+    path('album/<int:pk>/', AlbumRetrieveUpdateDestroyAPIView.as_view(),
+         name="album_RUD"),
 ]

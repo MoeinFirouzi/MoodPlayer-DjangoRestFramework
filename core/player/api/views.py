@@ -53,7 +53,7 @@ class ArtistListCreateAPIView(generics.ListCreateAPIView):
     Return list of Artists in Database.
     If 'id' parameter exists, then it will return a list of objects
     that their id are in 'id' parameter.
-    
+
     'POST':
     Create an Artist instance.
     """
@@ -77,7 +77,7 @@ class AlbumListCreateAPIView(generics.ListCreateAPIView):
     Return list of Albums in Database.
     If 'id' parameter exists, then it will return a list of objects
     that their id are in 'id' parameter.
-    
+
     'POST':
     Create an Album instance.
     """
@@ -114,3 +114,13 @@ class SearchMusicByName(generics.ListAPIView):
             return self.list(request, *args, **kwargs)
         else:
             return redirect(reverse('music_list'))
+
+
+class AlbumRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = AlbumSerializer
+    queryset = Album.objects.all()
+
+
+class ArtistRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ArtistSerializer
+    queryset = Artist.objects.all()
