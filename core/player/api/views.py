@@ -1,9 +1,8 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
-from .serializers import UploadMusicSerializer, MusicListSerializer
-from ..models import Music
+from .serializers import UploadMusicSerializer, MusicListSerializer, ArtistSerializer
+from ..models import Music, Artist
 
 
 class UploadMusic(generics.GenericAPIView):
@@ -36,5 +35,26 @@ class GetMusicDataList(generics.ListAPIView):
 
         else:
             queryset = Music.objects.all()
+
+        return queryset
+
+
+
+class GetArtistList(generics.ListAPIView):
+    """
+    Return list of Artists in Database.
+    If 'id' parameter exists, then it will return a list of objects
+    that their id are in 'id' parameter.
+    """
+    serializer_class = ArtistSerializer
+
+    def get_queryset(self):
+        ids = self.request.GET.get('id')
+        if ids:
+            id_list = list(map(int, ids.split(',')))
+            queryset = Artist.objects.filter(id__in=id_list)
+
+        else:
+            queryset = Artist.objects.all()
 
         return queryset
