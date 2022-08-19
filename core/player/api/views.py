@@ -3,13 +3,13 @@ from django.urls import reverse
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
-from .serializers import (AlbumSerializer, UploadMusicSerializer, MusicListSerializer,
+from .serializers import (AlbumSerializer, MusicSerializer, MusicListSerializer,
                           ArtistSerializer, Album)
 from ..models import Music, Artist, Album
 
 
 class UploadMusic(generics.GenericAPIView):
-    serializer_class = UploadMusicSerializer
+    serializer_class = MusicSerializer
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
@@ -40,6 +40,11 @@ class GetMusicDataList(generics.ListAPIView):
             queryset = Music.objects.all()
 
         return queryset
+
+
+class MusicRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = MusicSerializer
+    queryset = Music.objects.all()
 
 
 class GetArtistList(generics.ListAPIView):

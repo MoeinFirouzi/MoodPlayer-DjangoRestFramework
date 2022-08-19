@@ -15,7 +15,7 @@ class ArtistSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UploadMusicSerializer(serializers.ModelSerializer):
+class MusicSerializer(serializers.ModelSerializer):
     artist = serializers.CharField()
     artist_image = serializers.FileField(required=False)
 
@@ -52,10 +52,37 @@ class UploadMusicSerializer(serializers.ModelSerializer):
 
         return music_instance
 
+    def update(self, instance, validated_data):
+
+        artist_instance, created = Artist.objects.get_or_create(
+            name=validated_data['artist'])
+
+        if created or validated_data.get('artist_image'):
+            artist_instance.artist_image = validated_data.get('artist_image')
+            artist_instance.save()
+
+        album_instance, created = Album.objects.get_or_create(
+            name=validated_data['album'])
+        if created or validated_data.get('album_image'):
+            album_instance.album_image = validated_data.get('album_image')
+            album_instance.save()
+
+        validated_data.pop('artist', None)
+        validated_data.pop('album', None)
+        validated_data.pop('artist_image', None)
+        validated_data.pop('album_image', None)
+
+        instance.artist = artist_instance
+        instance.album = album_instance
+        instance.save()
+
+        return super().update(instance, validated_data)
+
 
 class MusicListSerializer(serializers.ModelSerializer):
     artist = ArtistSerializer()
-    album  = AlbumSerializer()
+    album = AlbumSerializer()
+
     class Meta:
         model = Music
         fields = '__all__'
