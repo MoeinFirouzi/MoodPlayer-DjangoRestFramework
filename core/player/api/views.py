@@ -1,7 +1,8 @@
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
-from .serializers import UploadMusicSerializer
+from .serializers import UploadMusicSerializer, MusicListSerializer
+from ..models import Music
 
 
 class UploadMusic(generics.GenericAPIView):
@@ -17,5 +18,6 @@ class UploadMusic(generics.GenericAPIView):
             return Response({'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class GetMusicDataList(generics.ListAPIView):
-#     serializer_class = 
+class GetMusicDataList(generics.ListAPIView):
+    serializer_class = MusicListSerializer
+    queryset = Music.objects.all()

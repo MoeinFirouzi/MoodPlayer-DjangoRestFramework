@@ -1,3 +1,4 @@
+from dataclasses import fields
 from rest_framework import serializers
 from ..models import Music, Album, Artist
 
@@ -50,3 +51,11 @@ class UploadMusicSerializer(serializers.ModelSerializer):
         music_instance.save()
 
         return music_instance
+
+
+class MusicListSerializer(serializers.ModelSerializer):
+    artist = ArtistSerializer()
+    album  = AlbumSerializer()
+    class Meta:
+        model = Music
+        fields = '__all__'
