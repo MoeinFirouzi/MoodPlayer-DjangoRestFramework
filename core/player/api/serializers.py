@@ -61,7 +61,7 @@ class MusicSerializer(serializers.ModelSerializer):
             return request.build_absolute_uri(obj.album.get_absolute_url())
         else:
             return None
-        
+
     def get_artist_absolute_url(self, obj):
         """
         Returns related artist to music instance absolute url
@@ -71,7 +71,7 @@ class MusicSerializer(serializers.ModelSerializer):
             return request.build_absolute_uri(obj.artist.get_absolute_url())
         else:
             return None
-        
+
     def create(self, validated_data):
         artist_instance, created = Artist.objects.get_or_create(
             name=validated_data['artist'])
@@ -122,12 +122,3 @@ class MusicSerializer(serializers.ModelSerializer):
         instance.save()
 
         return super().update(instance, validated_data)
-
-
-class MusicListSerializer(serializers.ModelSerializer):
-    artist = ArtistSerializer()
-    album = AlbumSerializer()
-
-    class Meta:
-        model = Music
-        fields = '__all__'
