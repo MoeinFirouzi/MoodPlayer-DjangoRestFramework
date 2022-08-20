@@ -46,3 +46,38 @@ class SensorState(models.Model):
     orientationW = models.FloatField(null=True, blank=True)
     orientationLength = models.FloatField(null=True, blank=True)
     orientationIsIdentity = models.BooleanField(null=True, blank=True)
+
+
+class MusicState(models.Model):
+    session_id = models.ForeignKey(
+        'Session', on_delete=models.CASCADE, null=True)
+    date_time = models.DateTimeField(null=True, blank=True)
+    muted = models.BooleanField(null=True, blank=True)
+    position = models.CharField(
+        max_length=250, null=True, blank=True)
+    state = models.CharField(
+        max_length=250, null=True, blank=True)
+    volume = models.IntegerField(null=True, blank=True)
+    playlist_count = models.IntegerField(null=True, blank=True)
+    repeatMode = models.CharField(
+        max_length=250, null=True, blank=True)
+    shuffle_mode = models.CharField(
+        max_length=250, null=True, blank=True)
+    media_type = models.CharField(
+        max_length=250, null=True, blank=True)
+    music_id = models.IntegerField(null=True, blank=True)
+    album = models.CharField(
+        max_length=250, null=True, blank=True)
+    artist = models.CharField(
+        max_length=250, null=True, blank=True)
+    duration = models.CharField(
+        max_length=250, null=True, blank=True)
+    genre = models.CharField(
+        max_length=250, null=True, blank=True)
+    energy = models.CharField(
+        max_length=250, null=True, blank=True)
+    valence = models.CharField(
+        max_length=250, null=True, blank=True)
+    title = models.CharField(
+        max_length=250, null=True, blank=True)
+    year = models.PositiveSmallIntegerField(blank=True, null=True)
