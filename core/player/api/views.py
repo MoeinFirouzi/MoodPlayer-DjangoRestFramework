@@ -3,8 +3,8 @@ from django.urls import reverse
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
-from .serializers import (AlbumSerializer, MusicSerializer, MusicListSerializer,
-                          ArtistSerializer, Album)
+from .serializers import (AlbumSerializer, MusicSerializer,
+                          ArtistSerializer)
 from ..models import Music, Artist, Album
 
 
@@ -92,12 +92,13 @@ class AlbumListCreateAPIView(generics.ListCreateAPIView):
 
 
 class SearchMusicByName(generics.ListAPIView):
-    serializer_class = MusicListSerializer
+    serializer_class = MusicSerializer
 
     def get_queryset(self):
         search_phrase = self.request.GET.get('search')
         if search_phrase:
             queryset = Music.objects.filter(title__contains=search_phrase)
+            print(queryset)
 
         else:
             queryset = Album.objects.all()
@@ -109,7 +110,7 @@ class SearchMusicByName(generics.ListAPIView):
         if search_phrase:
             return self.list(request, *args, **kwargs)
         else:
-            return redirect(reverse('music_list'))
+            return redirect(reverse('music_list_create'))
 
 
 class AlbumRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
