@@ -22,13 +22,13 @@ class UploadMusic(generics.GenericAPIView):
             return Response({'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class GetMusicDataList(generics.ListAPIView):
+class ListCreateMusic(generics.ListCreateAPIView):
     """
     Return list of Musics in Database.
     If 'id' parameter exists, then it will return list of objects
     that their id are in 'id' parameter.
     """
-    serializer_class = MusicListSerializer
+    serializer_class = MusicSerializer
 
     def get_queryset(self):
         ids = self.request.GET.get('id')
@@ -40,6 +40,16 @@ class GetMusicDataList(generics.ListAPIView):
             queryset = Music.objects.all()
 
         return queryset
+    
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            data = {'message': "Music has uploaded successfully",
+                    'id': serializer.data.get('id')}
+            return Response(data, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class MusicRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):

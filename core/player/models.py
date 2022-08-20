@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Music(models.Model):
@@ -15,7 +16,7 @@ class Music(models.Model):
                                related_name="musics", blank=True, null=True)
     album = models.ForeignKey('Album', on_delete=models.CASCADE,
                               related_name="musics", blank=True, null=True)
-    genre = models.CharField(max_length=250, blank=True, null=True) 
+    genre = models.CharField(max_length=250, blank=True, null=True)
     energy = models.CharField(choices=CHOICES, blank=True,
                               max_length=50, null=True)
     valence = models.CharField(choices=CHOICES, blank=True,
@@ -35,6 +36,23 @@ class Music(models.Model):
     def __str__(self) -> str:
         return self.title
 
+    def get_artist_id(self):
+        return self.artist.id
+
+    def get_album_id(self):
+        return self.album.id
+
+    def get_album_absolute_url(self):
+        return self.album.get_absolute_url()
+    
+    def get_artist_absolute_url(self):
+        return self.album.get_absolute_url()
+    
+    def get_absolute_url(self):
+        return reverse("music_RUD", kwargs={"pk": self.pk})
+
+        
+
 
 class Artist(models.Model):
     name = models.CharField(max_length=250, unique=True)
@@ -49,6 +67,9 @@ class Artist(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("artist_RUD", kwargs={"pk": self.pk})
+
 
 class Album(models.Model):
     name = models.CharField(max_length=250, unique=True)
@@ -59,6 +80,9 @@ class Album(models.Model):
         if self.name:
             self.name = self.name.lower()
         return super(Album, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("album_RUD", kwargs={"pk": self.pk})
 
     def __str__(self) -> str:
         return self.name

@@ -1,4 +1,3 @@
-from dataclasses import fields
 from rest_framework import serializers
 from ..models import Music, Album, Artist
 
@@ -16,18 +15,64 @@ class ArtistSerializer(serializers.ModelSerializer):
 
 
 class MusicSerializer(serializers.ModelSerializer):
+
+    absolute_url = serializers.SerializerMethodField()
+
     artist = serializers.CharField()
+    artist_id = serializers.ReadOnlyField(source='get_artist_id')
     artist_image = serializers.FileField(required=False)
 
+    # Refers to "get_artist_absolute_url" in Music Model
+    artist_url = serializers.ReadOnlyField(source='get_artist_absolute_url')
+
+    # Refers to "get_artist_absolute_url" in MusicSerializer
+    artist_absolute_url = serializers.SerializerMethodField()
+
     album = serializers.CharField()
+    album_id = serializers.ReadOnlyField(source='get_album_id')
     album_image = serializers.FileField(required=False)
+
+    # Refers to "get_album_absolute_url" in Music Model
+    album_url = serializers.ReadOnlyField(source='get_album_absolute_url')
+
+    # Refers to "get_album_absolute_url" in MusicSerializer
+    album_absolute_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Music
         fields = '__all__'
 
-    def create(self, validated_data):
+    def get_absolute_url(self, obj):
+        """
+        Returns Music instance absolute url
+        """
+        request = self.context.get('request')
+        if request:
+            return request.build_absolute_uri(obj.get_absolute_url())
+        else:
+            return None
 
+    def get_album_absolute_url(self, obj):
+        """
+        Returns related album to music instance absolute url
+        """
+        request = self.context.get('request')
+        if request:
+            return request.build_absolute_uri(obj.album.get_absolute_url())
+        else:
+            return None
+        
+    def get_artist_absolute_url(self, obj):
+        """
+        Returns related artist to music instance absolute url
+        """
+        request = self.context.get('request')
+        if request:
+            return request.build_absolute_uri(obj.artist.get_absolute_url())
+        else:
+            return None
+        
+    def create(self, validated_data):
         artist_instance, created = Artist.objects.get_or_create(
             name=validated_data['artist'])
 
