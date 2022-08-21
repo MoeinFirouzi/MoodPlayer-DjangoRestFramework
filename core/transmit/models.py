@@ -21,36 +21,36 @@ class SensorState(models.Model):
     date_time = models.CharField(
         max_length=250, null=True, blank=True)
     acceleration_x = models.FloatField(null=True, blank=True)
-    accelerationY = models.FloatField(null=True, blank=True)
-    accelerationZ = models.FloatField(null=True, blank=True)
-    accelerationLength = models.FloatField(null=True, blank=True)
-    pressureHectoPascal = models.FloatField(null=True, blank=True)
-    headingMagneticNorth = models.FloatField(null=True, blank=True)
-    locationUpdateTime = models.DateTimeField(null=True, blank=True)
-    locationLatitude = models.FloatField(null=True, blank=True)
-    locationLongitude = models.FloatField(null=True, blank=True)
-    locationAltitude = models.FloatField(null=True, blank=True)
-    locationAccuracy = models.FloatField(null=True, blank=True)
-    locationVerticalAccuracy = models.FloatField(null=True, blank=True)
-    locationSpeed = models.FloatField(null=True, blank=True)
-    locationCourseTrueNorth = models.FloatField(null=True, blank=True)
-    locationIsFromMockProvider = models.BooleanField(null=True, blank=True)
-    locationAltitudeRefrenceSystem = models.CharField(
+    acceleration_y = models.FloatField(null=True, blank=True)
+    acceleration_z = models.FloatField(null=True, blank=True)
+    acceleration_length = models.FloatField(null=True, blank=True)
+    pressure_hecto_pascal = models.FloatField(null=True, blank=True)
+    headingMagnetic_north = models.FloatField(null=True, blank=True)
+    locationUpdate_time = models.DateTimeField(null=True, blank=True)
+    location_latitude = models.FloatField(null=True, blank=True)
+    location_longitude = models.FloatField(null=True, blank=True)
+    location_altitude = models.FloatField(null=True, blank=True)
+    location_accuracy = models.FloatField(null=True, blank=True)
+    location_vertical_accuracy = models.FloatField(null=True, blank=True)
+    location_speed = models.FloatField(null=True, blank=True)
+    location_course_true_north = models.FloatField(null=True, blank=True)
+    location_is_from_mock_provider = models.BooleanField(null=True, blank=True)
+    location_altitude_reference_system = models.CharField(
         max_length=250, null=True, blank=True)
-    angularVelocityX = models.FloatField(null=True, blank=True)
-    angularVelocityY = models.FloatField(null=True, blank=True)
-    angularVelocityZ = models.FloatField(null=True, blank=True)
-    angularVelocityLength = models.FloatField(null=True, blank=True)
-    magneticFieldX = models.FloatField(null=True, blank=True)
-    magneticFieldY = models.FloatField(null=True, blank=True)
-    magneticFieldZ = models.FloatField(null=True, blank=True)
-    magneticFieldLength = models.FloatField(null=True, blank=True)
-    orientationX = models.FloatField(null=True, blank=True)
-    orientationY = models.FloatField(null=True, blank=True)
-    orientationZ = models.FloatField(null=True, blank=True)
-    orientationW = models.FloatField(null=True, blank=True)
-    orientationLength = models.FloatField(null=True, blank=True)
-    orientationIsIdentity = models.BooleanField(null=True, blank=True)
+    angularVelocity_x = models.FloatField(null=True, blank=True)
+    angularVelocity_y = models.FloatField(null=True, blank=True)
+    angularVelocity_z = models.FloatField(null=True, blank=True)
+    angularVelocity_length = models.FloatField(null=True, blank=True)
+    magneticField_x = models.FloatField(null=True, blank=True)
+    magneticField_y = models.FloatField(null=True, blank=True)
+    magneticField_z = models.FloatField(null=True, blank=True)
+    magneticField_length = models.FloatField(null=True, blank=True)
+    orientation_x = models.FloatField(null=True, blank=True)
+    orientation_y = models.FloatField(null=True, blank=True)
+    orientation_z = models.FloatField(null=True, blank=True)
+    orientation_w = models.FloatField(null=True, blank=True)
+    orientation_length = models.FloatField(null=True, blank=True)
+    orientation_isIdentity = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return f'Session id \'{self.session.id}\' Record \'{self.id}\''
@@ -94,7 +94,7 @@ class MusicState(models.Model):
 
     def get_session_user_id(self):
         if self.session_id:
-            return self.session_id.user.id
+            return self.session.user.id
         else:
             return None
 
