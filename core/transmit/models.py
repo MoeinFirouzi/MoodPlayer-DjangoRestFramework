@@ -52,6 +52,12 @@ class SensorState(models.Model):
     orientation_length = models.FloatField(null=True, blank=True)
     orientation_isIdentity = models.BooleanField(null=True, blank=True)
 
+    def get_session_user_id(self):
+        if self.session:
+            return self.session.user.id
+        else:
+            return None
+
     def __str__(self):
         return f'Session id \'{self.session.id}\' Record \'{self.id}\''
 
@@ -93,7 +99,7 @@ class MusicState(models.Model):
     year = models.PositiveSmallIntegerField(blank=True, null=True)
 
     def get_session_user_id(self):
-        if self.session_id:
+        if self.session:
             return self.session.user.id
         else:
             return None
