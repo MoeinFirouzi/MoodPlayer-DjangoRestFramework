@@ -26,7 +26,8 @@ class SensorState(models.Model):
     acceleration_length = models.FloatField(null=True, blank=True)
     pressure_hecto_pascal = models.FloatField(null=True, blank=True)
     headingMagnetic_north = models.FloatField(null=True, blank=True)
-    locationUpdate_time = models.DateTimeField(null=True, blank=True)
+    locationUpdate_time = models.CharField(
+        max_length=250, null=True, blank=True)
     location_latitude = models.FloatField(null=True, blank=True)
     location_longitude = models.FloatField(null=True, blank=True)
     location_altitude = models.FloatField(null=True, blank=True)
