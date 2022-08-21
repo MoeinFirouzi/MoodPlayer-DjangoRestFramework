@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from .serializers import (AlbumSerializer, MusicSerializer,
                           ArtistSerializer)
 from ..models import Music, Artist, Album
+from rest_framework.permissions import IsAuthenticated
 
 
 class ListCreateMusic(generics.ListCreateAPIView):
@@ -15,6 +16,7 @@ class ListCreateMusic(generics.ListCreateAPIView):
     that their id are in 'id' parameter.
     """
     serializer_class = MusicSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         ids = self.request.GET.get('id')
@@ -41,6 +43,7 @@ class ListCreateMusic(generics.ListCreateAPIView):
 class MusicRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MusicSerializer
     queryset = Music.objects.all()
+    permission_classes = [IsAuthenticated]
 
 
 class ArtistListCreateAPIView(generics.ListCreateAPIView):
@@ -54,6 +57,7 @@ class ArtistListCreateAPIView(generics.ListCreateAPIView):
     Create an Artist instance.
     """
     serializer_class = ArtistSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         ids = self.request.GET.get('id')
@@ -78,6 +82,7 @@ class AlbumListCreateAPIView(generics.ListCreateAPIView):
     Create an Album instance.
     """
     serializer_class = AlbumSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         ids = self.request.GET.get('id')
@@ -93,6 +98,7 @@ class AlbumListCreateAPIView(generics.ListCreateAPIView):
 
 class SearchMusicByName(generics.ListAPIView):
     serializer_class = MusicSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         search_phrase = self.request.GET.get('search')
@@ -116,8 +122,10 @@ class SearchMusicByName(generics.ListAPIView):
 class AlbumRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AlbumSerializer
     queryset = Album.objects.all()
+    permission_classes = [IsAuthenticated]
 
 
 class ArtistRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArtistSerializer
     queryset = Artist.objects.all()
+    permission_classes = [IsAuthenticated]
