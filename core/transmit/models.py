@@ -14,7 +14,8 @@ class Session(models.Model):
 
 class SensorState(models.Model):
     session = models.ForeignKey('Session', on_delete=models.CASCADE, null=True)
-    date_time = models.DateTimeField(null=True, blank=True)
+    date_time = models.CharField(
+        max_length=250, null=True, blank=True)
     acceleration_x = models.FloatField(null=True, blank=True)
     accelerationY = models.FloatField(null=True, blank=True)
     accelerationZ = models.FloatField(null=True, blank=True)
@@ -51,7 +52,8 @@ class SensorState(models.Model):
 class MusicState(models.Model):
     session_id = models.ForeignKey(
         'Session', on_delete=models.CASCADE, null=True)
-    date_time = models.DateTimeField(null=True, blank=True)
+    date_time = models.CharField(
+        max_length=250, null=True, blank=True)
     muted = models.BooleanField(null=True, blank=True)
     position = models.CharField(
         max_length=250, null=True, blank=True)
