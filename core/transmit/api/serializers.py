@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import MusicState, SensorState
+from ..models import MusicState, SensorState, Session
 
 
 class MusicStateSerializer(serializers.ModelSerializer):
@@ -22,3 +22,10 @@ class SensorStateSerializer(serializers.ModelSerializer):
 
     def get_user_id(self, obj):
         return obj.get_session_user_id()
+    
+    
+class SessionSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
+    class Meta:
+        model = Session
+        fields = ['id']
