@@ -11,6 +11,9 @@ class Session(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f'User id \'{self.user.id}\' Session \'{self.id}\''
+
 
 class SensorState(models.Model):
     user_id = models.IntegerField(null=True, blank=True)
@@ -49,10 +52,13 @@ class SensorState(models.Model):
     orientationLength = models.FloatField(null=True, blank=True)
     orientationIsIdentity = models.BooleanField(null=True, blank=True)
 
+    def __str__(self):
+        return f'Session id \'{self.session.id}\' Record \'{self.id}\''
+
 
 class MusicState(models.Model):
     user_id = models.IntegerField(null=True, blank=True)
-    session_id = models.ForeignKey(
+    session = models.ForeignKey(
         'Session', on_delete=models.CASCADE, null=True)
     date_time = models.CharField(
         max_length=250, null=True, blank=True)
@@ -85,3 +91,12 @@ class MusicState(models.Model):
     title = models.CharField(
         max_length=250, null=True, blank=True)
     year = models.PositiveSmallIntegerField(blank=True, null=True)
+
+    def get_session_user_id(self):
+        if self.session_id:
+            return self.session_id.user.id
+        else:
+            return None
+
+    def __str__(self):
+        return f'Session id \'{self.session.id}\' Record \'{self.id}\''
