@@ -13,6 +13,7 @@ class Session(models.Model):
 
 
 class SensorState(models.Model):
+    user_id = models.IntegerField(null=True, blank=True)
     session = models.ForeignKey('Session', on_delete=models.CASCADE, null=True)
     date_time = models.CharField(
         max_length=250, null=True, blank=True)
@@ -50,6 +51,7 @@ class SensorState(models.Model):
 
 
 class MusicState(models.Model):
+    user_id = models.IntegerField(null=True, blank=True)
     session_id = models.ForeignKey(
         'Session', on_delete=models.CASCADE, null=True)
     date_time = models.CharField(
