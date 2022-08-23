@@ -4,8 +4,10 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from .serializers import (EmailLoginSerializer, UsernameLoginSerializer,
-                          UserSignUpSerializer)
+                          UserSignUpSerializer, UserLogOutSerializer)
 
 User = get_user_model()
 
@@ -83,3 +85,12 @@ class SignUp(generics.GenericAPIView):
 
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LogOut(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserLogOutSerializer
+    
+    def post(self, request):
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

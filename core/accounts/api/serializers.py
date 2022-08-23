@@ -30,3 +30,6 @@ class UserSignUpSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+class UserLogOutSerializer(serializers.Serializer):
+    pass
