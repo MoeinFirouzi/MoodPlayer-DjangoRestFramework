@@ -4,6 +4,6 @@ from .api.views import (MusicStateCreateAPIView, SensorStateCreateAPIView,
 urlpatterns = [
     path('music/', MusicStateCreateAPIView.as_view(), name='music_state_create'),
     path('sensor/', SensorStateCreateAPIView.as_view(), name='sensor_state_create'),
-    path('session/', SessionCreateAPIView.as_view(), name='sensor_start'),
-    path('session/<int:pk>/', SessionDeactivateAPIView.as_view(), name='sensor_halt'),
+    path('session/', SessionCreateAPIView.as_view(), name='session_start'),
+    path('session/<int:pk>/', SessionDeactivateAPIView.as_view(), name='session_halt'),
 ]
