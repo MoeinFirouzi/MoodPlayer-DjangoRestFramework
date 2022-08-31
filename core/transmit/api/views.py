@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from .serializers import (MusicStateSerializer, SensorStateSerializer,
                           SessionSerializer)
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from ..models import SensorState
+from ..models import SensorState, MusicState
 
 
 class MusicStateCreateAPIView(generics.CreateAPIView):
@@ -46,8 +46,27 @@ class SessionDeactivateAPIView(generics.UpdateAPIView):
 
 class GetSensorState(generics.ListAPIView):
     serializer_class = SensorStateSerializer
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = [IsAdminUser]
     queryset = SensorState.objects.all()
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+
+        payload = {'data': serializer.data}
+        return Response(payload)
+
+
+class GetMusicState(generics.ListAPIView):
+    serializer_class = MusicStateSerializer
+    permission_classes = [IsAdminUser]
+    queryset = MusicState.objects.all()
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
