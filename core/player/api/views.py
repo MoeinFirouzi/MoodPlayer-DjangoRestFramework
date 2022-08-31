@@ -57,6 +57,12 @@ class MusicRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Music.objects.all()
     permission_classes = [IsAuthenticated]
 
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        payload = {'data': serializer.data}
+        return Response(payload)
+
 
 class ArtistListCreateAPIView(generics.ListCreateAPIView):
     """
