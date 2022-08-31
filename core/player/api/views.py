@@ -122,7 +122,6 @@ class SearchMusicByName(generics.ListAPIView):
         search_phrase = self.request.GET.get('search')
         if search_phrase:
             queryset = Music.objects.filter(title__contains=search_phrase)
-            print(queryset)
 
         else:
             queryset = Album.objects.all()
