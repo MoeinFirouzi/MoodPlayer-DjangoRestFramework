@@ -113,6 +113,19 @@ class AlbumListCreateAPIView(generics.ListCreateAPIView):
 
         return queryset
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        
+        payload = {'data': serializer.data}
+        return Response(payload)
+
 
 class SearchMusicByName(generics.ListAPIView):
     serializer_class = MusicSerializer
@@ -153,6 +166,13 @@ class AlbumRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AlbumSerializer
     queryset = Album.objects.all()
     permission_classes = [IsAuthenticated]
+    
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        
+        payload = {'data': serializer.data}
+        return Response(payload)
 
 
 class ArtistRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
