@@ -25,8 +25,8 @@ class SensorState(models.Model):
     acceleration_z = models.FloatField(null=True, blank=True)
     acceleration_length = models.FloatField(null=True, blank=True)
     pressure_hecto_pascal = models.FloatField(null=True, blank=True)
-    headingMagnetic_north = models.FloatField(null=True, blank=True)
-    locationUpdate_time = models.CharField(
+    heading_magnetic_north = models.FloatField(null=True, blank=True)
+    location_update_time = models.CharField(
         max_length=250, null=True, blank=True)
     location_latitude = models.FloatField(null=True, blank=True)
     location_longitude = models.FloatField(null=True, blank=True)
@@ -38,20 +38,20 @@ class SensorState(models.Model):
     location_is_from_mock_provider = models.BooleanField(null=True, blank=True)
     location_altitude_reference_system = models.CharField(
         max_length=250, null=True, blank=True)
-    angularVelocity_x = models.FloatField(null=True, blank=True)
-    angularVelocity_y = models.FloatField(null=True, blank=True)
-    angularVelocity_z = models.FloatField(null=True, blank=True)
-    angularVelocity_length = models.FloatField(null=True, blank=True)
-    magneticField_x = models.FloatField(null=True, blank=True)
-    magneticField_y = models.FloatField(null=True, blank=True)
-    magneticField_z = models.FloatField(null=True, blank=True)
-    magneticField_length = models.FloatField(null=True, blank=True)
+    angular_velocity_x = models.FloatField(null=True, blank=True)
+    angular_velocity_y = models.FloatField(null=True, blank=True)
+    angular_velocity_z = models.FloatField(null=True, blank=True)
+    angular_velocity_length = models.FloatField(null=True, blank=True)
+    magnetic_field_x = models.FloatField(null=True, blank=True)
+    magnetic_field_y = models.FloatField(null=True, blank=True)
+    magnetic_field_z = models.FloatField(null=True, blank=True)
+    magnetic_field_length = models.FloatField(null=True, blank=True)
     orientation_x = models.FloatField(null=True, blank=True)
     orientation_y = models.FloatField(null=True, blank=True)
     orientation_z = models.FloatField(null=True, blank=True)
     orientation_w = models.FloatField(null=True, blank=True)
     orientation_length = models.FloatField(null=True, blank=True)
-    orientation_isIdentity = models.BooleanField(null=True, blank=True)
+    orientation_is_identity = models.BooleanField(null=True, blank=True)
 
     def get_session_user_id(self):
         if self.session:
@@ -76,7 +76,7 @@ class MusicState(models.Model):
         max_length=250, null=True, blank=True)
     volume = models.IntegerField(null=True, blank=True)
     playlist_count = models.IntegerField(null=True, blank=True)
-    repeatMode = models.CharField(
+    repeat_mode = models.CharField(
         max_length=250, null=True, blank=True)
     shuffle_mode = models.CharField(
         max_length=250, null=True, blank=True)
