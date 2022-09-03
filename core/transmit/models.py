@@ -60,7 +60,7 @@ class SensorState(models.Model):
             return None
 
     def __str__(self):
-        return f'Session id \'{self.session.id}\' Record \'{self.id}\''
+        return f'Record \'{self.id}\''
 
 
 class MusicState(models.Model):
@@ -106,4 +106,4 @@ class MusicState(models.Model):
             return None
 
     def __str__(self):
-        return f'Session id \'{self.session.id}\' Record \'{self.id}\''
+        return f'Record \'{self.id}\''
