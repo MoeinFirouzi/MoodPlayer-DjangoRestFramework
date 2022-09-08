@@ -21,8 +21,8 @@ services:
     depends_on:
       - moodplayer-db
     command: >
-      sh -c "python manage.py migrate &&
-             gunicorn core.wsgi:application -b 0.0.0.0:8000 -w 2 --threads 2"
+      sh -c "python core/manage.py migrate &&
+             gunicorn core.core.wsgi:application -b 0.0.0.0:8000 -w 2 --threads 2"
     networks:
       - local_network
 
