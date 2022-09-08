@@ -1,0 +1,43 @@
+version: "3.7"
+
+volumes:
+  psql_moodplayer_data:
+
+networks:
+  local_network:
+
+
+services:
+  moodplayer-web:
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    restart: unless-stopped
+    image: moodplayer:prod
+    volumes:
+      - ./:/opt/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - moodplayer-db
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - local_network
+
+  moodplayer-db:
+    restart: unless-stopped
+    image: postgres:latest
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_USER=${DB_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${DB_POSTGRES_PASS}
+      - POSTGRES_DB=${DB_POSTGRES_NAME}
+
+    volumes:
+      - psql_reporing_data:/var/lib/postgresql/data:z
+
+    networks:
+      - local_network
