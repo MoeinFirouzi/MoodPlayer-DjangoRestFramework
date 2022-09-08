@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('transmit', '0006_auto_20220821_1412'),
+        ("transmit", "0006_auto_20220821_1412"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='sensorstate',
-            name='locationUpdate_time',
+            model_name="sensorstate",
+            name="locationUpdate_time",
             field=models.CharField(blank=True, max_length=250, null=True),
         ),
     ]

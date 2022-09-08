@@ -8,39 +8,113 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Album',
+            name="Album",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=250, unique=True)),
-                ('album_image', models.ImageField(blank=True, upload_to='music/images/')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=250, unique=True)),
+                (
+                    "album_image",
+                    models.ImageField(blank=True, upload_to="music/images/"),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Artist',
+            name="Artist",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=250, unique=True)),
-                ('artist_image', models.ImageField(blank=True, upload_to='music/images/')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=250, unique=True)),
+                (
+                    "artist_image",
+                    models.ImageField(blank=True, upload_to="music/images/"),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Music',
+            name="Music",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(blank=True, max_length=250)),
-                ('genre', models.CharField(blank=True, max_length=250)),
-                ('energy', models.CharField(blank=True, choices=[('Too Negative', 'Too Negative'), ('Negative', 'Negative'), ('Neutral', 'Neutral'), ('Positive', 'Positive'), ('Too Positive', 'Too Positive')], max_length=50)),
-                ('valence', models.CharField(blank=True, choices=[('Too Negative', 'Too Negative'), ('Negative', 'Negative'), ('Neutral', 'Neutral'), ('Positive', 'Positive'), ('Too Positive', 'Too Positive')], max_length=50)),
-                ('song_image', models.ImageField(blank=True, upload_to='music/images/')),
-                ('year', models.PositiveSmallIntegerField(blank=True)),
-                ('address', models.FileField(blank=True, upload_to='')),
-                ('album', models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, related_name='musics', to='player.album')),
-                ('artist', models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, related_name='musics', to='player.artist')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(blank=True, max_length=250)),
+                ("genre", models.CharField(blank=True, max_length=250)),
+                (
+                    "energy",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("Too Negative", "Too Negative"),
+                            ("Negative", "Negative"),
+                            ("Neutral", "Neutral"),
+                            ("Positive", "Positive"),
+                            ("Too Positive", "Too Positive"),
+                        ],
+                        max_length=50,
+                    ),
+                ),
+                (
+                    "valence",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("Too Negative", "Too Negative"),
+                            ("Negative", "Negative"),
+                            ("Neutral", "Neutral"),
+                            ("Positive", "Positive"),
+                            ("Too Positive", "Too Positive"),
+                        ],
+                        max_length=50,
+                    ),
+                ),
+                (
+                    "song_image",
+                    models.ImageField(blank=True, upload_to="music/images/"),
+                ),
+                ("year", models.PositiveSmallIntegerField(blank=True)),
+                ("address", models.FileField(blank=True, upload_to="")),
+                (
+                    "album",
+                    models.ForeignKey(
+                        blank=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="musics",
+                        to="player.album",
+                    ),
+                ),
+                (
+                    "artist",
+                    models.ForeignKey(
+                        blank=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="musics",
+                        to="player.artist",
+                    ),
+                ),
             ],
         ),
     ]

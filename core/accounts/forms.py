@@ -7,13 +7,15 @@ from django.core.exceptions import ValidationError
 class CustomUserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+
+    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
     password2 = forms.CharField(
-        label='Password confirmation', widget=forms.PasswordInput)
+        label="Password confirmation", widget=forms.PasswordInput
+    )
 
     class Meta:
         model = User
-        fields = ('email', 'username')
+        fields = ("email", "username")
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -34,10 +36,12 @@ class CustomUserCreationForm(forms.ModelForm):
 
 
 class CustomUserChangeForm(forms.ModelForm):
-
     class Meta:
         model = User
-        fields = ('email', 'username',)
+        fields = (
+            "email",
+            "username",
+        )
 
 
 class LoginForm(forms.Form):

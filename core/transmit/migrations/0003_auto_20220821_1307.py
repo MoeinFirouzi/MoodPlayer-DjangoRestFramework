@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('transmit', '0002_musicstate'),
+        ("transmit", "0002_musicstate"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='musicstate',
-            name='date_time',
+            model_name="musicstate",
+            name="date_time",
             field=models.CharField(blank=True, max_length=250, null=True),
         ),
         migrations.AlterField(
-            model_name='sensorstate',
-            name='date_time',
+            model_name="sensorstate",
+            name="date_time",
             field=models.CharField(blank=True, max_length=250, null=True),
         ),
     ]

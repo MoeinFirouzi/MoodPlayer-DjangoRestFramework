@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('transmit', '0003_auto_20220821_1307'),
+        ("transmit", "0003_auto_20220821_1307"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='musicstate',
-            name='user_id',
+            model_name="musicstate",
+            name="user_id",
             field=models.IntegerField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='sensorstate',
-            name='user_id',
+            model_name="sensorstate",
+            name="user_id",
             field=models.IntegerField(blank=True, null=True),
         ),
     ]

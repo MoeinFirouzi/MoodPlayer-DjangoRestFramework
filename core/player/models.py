@@ -12,19 +12,18 @@ class Music(models.Model):
     )
 
     title = models.CharField(max_length=250, blank=True, null=True)
-    artist = models.ForeignKey('Artist', on_delete=models.CASCADE,
-                               related_name="musics", blank=True, null=True)
-    album = models.ForeignKey('Album', on_delete=models.CASCADE,
-                              related_name="musics", blank=True, null=True)
+    artist = models.ForeignKey(
+        "Artist", on_delete=models.CASCADE, related_name="musics", blank=True, null=True
+    )
+    album = models.ForeignKey(
+        "Album", on_delete=models.CASCADE, related_name="musics", blank=True, null=True
+    )
     genre = models.CharField(max_length=250, blank=True, null=True)
-    energy = models.CharField(choices=CHOICES, blank=True,
-                              max_length=50, null=True)
-    valence = models.CharField(choices=CHOICES, blank=True,
-                               max_length=50, null=True)
-    song_image = models.ImageField(upload_to='music/images/',
-                                   blank=True, null=True)
+    energy = models.CharField(choices=CHOICES, blank=True, max_length=50, null=True)
+    valence = models.CharField(choices=CHOICES, blank=True, max_length=50, null=True)
+    song_image = models.ImageField(upload_to="music/images/", blank=True, null=True)
     year = models.PositiveSmallIntegerField(blank=True, null=True)
-    address = models.FileField(upload_to='music/files/', blank=True, null=True)
+    address = models.FileField(upload_to="music/files/", blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.title:
@@ -44,20 +43,17 @@ class Music(models.Model):
 
     def get_album_absolute_url(self):
         return self.album.get_absolute_url()
-    
+
     def get_artist_absolute_url(self):
         return self.album.get_absolute_url()
-    
+
     def get_absolute_url(self):
         return reverse("music_RUD", kwargs={"pk": self.pk})
-
-        
 
 
 class Artist(models.Model):
     name = models.CharField(max_length=250, unique=True)
-    artist_image = models.ImageField(upload_to='artist/images/',
-                                     blank=True, null=True)
+    artist_image = models.ImageField(upload_to="artist/images/", blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.name:
@@ -73,8 +69,7 @@ class Artist(models.Model):
 
 class Album(models.Model):
     name = models.CharField(max_length=250, unique=True)
-    album_image = models.ImageField(upload_to='album/images/',
-                                    blank=True, null=True)
+    album_image = models.ImageField(upload_to="album/images/", blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.name:

@@ -6,23 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('player', '0001_initial'),
+        ("player", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='album',
-            name='album_image',
-            field=models.ImageField(blank=True, upload_to='album/images/'),
+            model_name="album",
+            name="album_image",
+            field=models.ImageField(blank=True, upload_to="album/images/"),
         ),
         migrations.AlterField(
-            model_name='artist',
-            name='artist_image',
-            field=models.ImageField(blank=True, upload_to='artist/images/'),
+            model_name="artist",
+            name="artist_image",
+            field=models.ImageField(blank=True, upload_to="artist/images/"),
         ),
         migrations.AlterField(
-            model_name='music',
-            name='address',
-            field=models.FileField(blank=True, upload_to='music/files/'),
+            model_name="music",
+            name="address",
+            field=models.FileField(blank=True, upload_to="music/files/"),
         ),
     ]
