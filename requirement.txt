@@ -1,5 +1,7 @@
-django==3.2
-djangorestframework
-django-filter
-markdown
-Pillow
+django==4.1.1
+djangorestframework==3.13.1
+django-filter==22.1
+markdown==3.4.1
+Pillow==9.2.0
+psycopg2-binary==2.9.3
+gunicorn==20.1.0

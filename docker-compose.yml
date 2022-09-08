@@ -22,7 +22,7 @@ services:
       - moodplayer-db
     command: >
       sh -c "python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
+             gunicorn core.wsgi:application -b 0.0.0.0:8000 -w 2 --threads 2"
     networks:
       - local_network
 
@@ -37,7 +37,7 @@ services:
       - POSTGRES_DB=${DB_POSTGRES_NAME}
 
     volumes:
-      - psql_reporing_data:/var/lib/postgresql/data:z
+      - psql_moodplayer_data:/var/lib/postgresql/data:z
 
     networks:
       - local_network
