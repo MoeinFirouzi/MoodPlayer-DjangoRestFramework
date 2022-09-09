@@ -56,7 +56,7 @@ class MusicSerializer(serializers.ModelSerializer):
             port = PORT
             if port:
                 base_url = f"{base_url}:{port}"
-            return f"http://{base_url}/{obj_url}"
+            return f"http://{base_url}{obj_url}"
         else:
             return None
 
@@ -71,7 +71,7 @@ class MusicSerializer(serializers.ModelSerializer):
             port = PORT
             if port:
                 base_url = f"{base_url}:{port}"
-            return f"http://{base_url}/{obj_url}"
+            return f"http://{base_url}{obj_url}"
         else:
             return None
 
@@ -86,7 +86,7 @@ class MusicSerializer(serializers.ModelSerializer):
             port = PORT
             if port:
                 base_url = f"{base_url}:{port}"
-            return f"http://{base_url}/{obj_url}"
+            return f"http://{base_url}{obj_url}"
         else:
             return None
 
@@ -97,7 +97,7 @@ class MusicSerializer(serializers.ModelSerializer):
         if port:
             base_url = f"{base_url}:{port}"
             
-        return f"http://{base_url}/{obj_url}"
+        return f"http://{base_url}{obj_url}"
         
         
     def get_song_image(self, obj):
@@ -107,7 +107,7 @@ class MusicSerializer(serializers.ModelSerializer):
         if port:
             base_url = f"{base_url}:{port}"
             
-        return f"http://{base_url}/{obj_url}"
+        return f"http://{base_url}{obj_url}"
         
         
     def create(self, validated_data):
