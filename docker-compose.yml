@@ -2,6 +2,7 @@ version: "3.7"
 
 volumes:
   psql_moodplayer_data:
+  static_volume:
 
 networks:
   local_network:
@@ -16,8 +17,8 @@ services:
     image: moodplayer:prod
     volumes:
       - ./:/opt/app
-    ports:
-      - "8000:8000"
+    expose:
+      - 8000
     depends_on:
       - moodplayer-db
     command: >
@@ -41,3 +42,13 @@ services:
 
     networks:
       - local_network
+
+  moodplayer-nginx:
+    build: ./nginx
+    ports:
+      - "1337:80"
+    volumes:
+      - static_volume:/opt/app/staticfiles
+      - media_volume:/opt/app/mediafiles
+    depends_on:
+      - moodplayer-web
