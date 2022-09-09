@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from ..models import Music, Album, Artist
-from ...core.settings import PORT, BASE_URL
+from core.settings import PORT, BASE_URL
 
 class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
