@@ -1,0 +1,56 @@
+version: "3.7"
+
+volumes:
+  psql_moodplayer_data:
+  static_volume:
+  media_volume:
+
+networks:
+  local_network:
+
+
+services:
+  moodplayer-web:
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    restart: unless-stopped
+    image: moodplayer:prod
+    volumes:
+      - ./:/opt/app
+    expose:
+      - 8000
+    depends_on:
+      - moodplayer-db
+    command: >
+      sh -c "python manage.py migrate &&
+             gunicorn core.wsgi:application -b 0.0.0.0:8000 -w 2 --threads 2"
+    networks:
+      - local_network
+
+  moodplayer-db:
+    restart: unless-stopped
+    image: postgres:latest
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${DB_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${DB_POSTGRES_PASS}
+      - POSTGRES_DB=${DB_POSTGRES_NAME}
+
+    volumes:
+      - psql_moodplayer_data:/var/lib/postgresql/data:z
+
+    networks:
+      - local_network
+
+  moodplayer-nginx:
+    build: ./nginx
+    ports:
+      - "1337:80"
+    volumes:
+      - ./:/opt/app
+    depends_on:
+      - moodplayer-web
+    networks:
+      - local_network
