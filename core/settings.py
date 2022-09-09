@@ -29,7 +29,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = [env("ALLOWED_HOSTS")]
-
+CSRF_TRUSTED_ORIGINS = ['http://31.7.74.196:1337']
 # Application definition
 
 INSTALLED_APPS = [
