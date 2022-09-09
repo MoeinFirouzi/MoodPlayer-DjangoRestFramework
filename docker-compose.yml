@@ -53,3 +53,5 @@ services:
       - media_volume:/opt/app/media
     depends_on:
       - moodplayer-web
+    networks:
+      - local_network
