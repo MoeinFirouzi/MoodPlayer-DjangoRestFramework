@@ -37,7 +37,10 @@ class MusicSerializer(serializers.ModelSerializer):
 
     # Refers to "get_album_absolute_url" in MusicSerializer
     album_absolute_url = serializers.SerializerMethodField()
-
+    
+    address = serializers.SerializerMethodField()
+    song_image = serializers.SerializerMethodField()
+    
     class Meta:
         model = Music
         fields = "__all__"
@@ -87,6 +90,26 @@ class MusicSerializer(serializers.ModelSerializer):
         else:
             return None
 
+    def get_address(self, obj):
+        obj_url = obj.address.path
+        base_url = BASE_URL
+        port = PORT
+        if port:
+            base_url = f"{base_url}:{port}"
+            
+        return f"http://{base_url}/{obj_url}"
+        
+        
+    def get_song_image(self, obj):
+        obj_url = obj.song_image.path
+        base_url = BASE_URL
+        port = PORT
+        if port:
+            base_url = f"{base_url}:{port}"
+            
+        return f"http://{base_url}/{obj_url}"
+        
+        
     def create(self, validated_data):
         artist_instance, created = Artist.objects.get_or_create(
             name=validated_data["artist"]
