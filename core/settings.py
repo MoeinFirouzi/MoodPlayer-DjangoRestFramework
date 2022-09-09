@@ -31,7 +31,8 @@ DEBUG = env("DEBUG")
 ALLOWED_HOSTS = [env("ALLOWED_HOSTS")]
 CSRF_TRUSTED_ORIGINS = ['http://31.7.74.196:1337']
 # Application definition
-
+BASE_URL = env("BASE_URL")
+PORT = env("PORT", default=None)
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
