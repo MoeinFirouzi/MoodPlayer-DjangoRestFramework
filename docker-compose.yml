@@ -3,6 +3,7 @@ version: "3.7"
 volumes:
   psql_moodplayer_data:
   static_volume:
+  media_volume:
 
 networks:
   local_network:
@@ -49,6 +50,6 @@ services:
       - "1337:80"
     volumes:
       - static_volume:/opt/app/staticfiles
-      - media_volume:/opt/app/mediafiles
+      - media_volume:/opt/app/media
     depends_on:
       - moodplayer-web
