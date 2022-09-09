@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from ..models import Music, Album, Artist
-
+from ...core.settings import env
 
 class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
@@ -48,7 +48,12 @@ class MusicSerializer(serializers.ModelSerializer):
         """
         request = self.context.get("request")
         if request:
-            return request.build_absolute_uri(obj.get_absolute_url())
+            obj_url = obj.get_absolute_url()
+            base_url = env("BASE_URL")
+            port = env("PORT", default=None)
+            if port:
+                base_url = f"{base_url}:{port}"
+            return f"http://{base_url}/{obj_url}"
         else:
             return None
 
@@ -58,7 +63,12 @@ class MusicSerializer(serializers.ModelSerializer):
         """
         request = self.context.get("request")
         if request:
-            return request.build_absolute_uri(obj.album.get_absolute_url())
+            obj_url = obj.album.get_absolute_url()
+            base_url = env("BASE_URL")
+            port = env("PORT", default=None)
+            if port:
+                base_url = f"{base_url}:{port}"
+            return f"http://{base_url}/{obj_url}"
         else:
             return None
 
@@ -68,7 +78,12 @@ class MusicSerializer(serializers.ModelSerializer):
         """
         request = self.context.get("request")
         if request:
-            return request.build_absolute_uri(obj.artist.get_absolute_url())
+            obj_url = obj.artist.get_absolute_url()
+            base_url = env("BASE_URL")
+            port = env("PORT", default=None)
+            if port:
+                base_url = f"{base_url}:{port}"
+            return f"http://{base_url}/{obj_url}"
         else:
             return None
 
