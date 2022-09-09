@@ -49,8 +49,7 @@ services:
     ports:
       - "1337:80"
     volumes:
-      - static_volume:/opt/app/staticfiles
-      - media_volume:/opt/app/media
+      - ./:/opt/app
     depends_on:
       - moodplayer-web
     networks:
