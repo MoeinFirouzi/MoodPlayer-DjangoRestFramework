@@ -70,7 +70,7 @@ class MusicRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 class ArtistListCreateAPIView(generics.ListCreateAPIView):
     """
-    'POST':
+    'GET':
     Return list of Artists in Database.
     If 'id' parameter exists, then it will return a list of objects
     that their id are in 'id' parameter.
