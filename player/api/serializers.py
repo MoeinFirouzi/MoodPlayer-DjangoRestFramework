@@ -79,7 +79,7 @@ class MusicSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         artist_instance, created = Artist.objects.get_or_create(
-            name=validated_data["artist"]
+            name=validated_data["artist"].lower()
         )
 
         if created or validated_data.get("artist_image"):
@@ -87,7 +87,7 @@ class MusicSerializer(serializers.ModelSerializer):
             artist_instance.save()
 
         album_instance, created = Album.objects.get_or_create(
-            name=validated_data["album"]
+            name=validated_data["album"].lower()
         )
         if created or validated_data.get("album_image"):
             album_instance.album_image = validated_data.get("album_image")

@@ -45,7 +45,7 @@ class Music(models.Model):
         return self.album.get_absolute_url()
 
     def get_artist_absolute_url(self):
-        return self.album.get_absolute_url()
+        return self.artist.get_absolute_url()
 
     def get_absolute_url(self):
         return reverse("music_RUD", kwargs={"pk": self.pk})
