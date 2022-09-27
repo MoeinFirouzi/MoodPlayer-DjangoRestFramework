@@ -5,7 +5,7 @@ from .api.views import (
     SessionCreateAPIView,
     SessionDeactivateAPIView,
     GetSensorState,
-    GetMusicState,
+    GetMusicState,GetSessionData
 )
 
 urlpatterns = [
@@ -15,4 +15,5 @@ urlpatterns = [
     path("session/<int:pk>/", SessionDeactivateAPIView.as_view(), name="session_halt"),
     path("sensor/data/", GetSensorState.as_view(), name="get_sensor_data"),
     path("music/data/", GetMusicState.as_view(), name="get_music_data"),
+    path("session/<int:pk>/get_data/",GetSessionData.as_view(), name="get_session_data"),
 ]

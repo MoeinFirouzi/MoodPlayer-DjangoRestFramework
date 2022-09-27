@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404
 from .serializers import MusicStateSerializer, SensorStateSerializer, SessionSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from ..models import SensorState, MusicState
+from .utilize import CSVConvertor, ZipConvertor, FileCleaner
+from django.http import HttpResponse, FileResponse
 
 
 class MusicStateCreateAPIView(generics.CreateAPIView):
@@ -79,3 +81,32 @@ class GetMusicState(generics.ListAPIView):
 
         payload = {"data": serializer.data}
         return Response(payload)
+
+
+class GetSessionData(generics.GenericAPIView):
+    # permission_classes = [IsAuthenticated, IsAdminUser]
+    def get(self, request, *args, **kwargs):
+        session_id = kwargs.get("pk", None)
+
+        convertor = CSVConvertor(f'sensor_{session_id}')
+        query_set = SensorState.objects.filter(session=session_id)
+        convertor.convert(query_set)
+
+        convertor = CSVConvertor(f'music_{session_id}')
+        query_set = MusicState.objects.filter(session=session_id)
+        convertor.convert(query_set)
+
+        zip_convertor = ZipConvertor(session_id=session_id)
+        zip_convertor.convert()
+
+        try:
+            return FileResponse(
+                open(zip_convertor.path, 'rb'),
+                as_attachment=True,
+                filename=f'{session_id}.zip'
+            )
+        except:
+            pass
+        finally:
+            cleaner = FileCleaner(session_id)
+            cleaner.clean()
