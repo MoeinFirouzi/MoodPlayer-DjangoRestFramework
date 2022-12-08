@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "accounts",
     "player",
     "transmit",
+    'recommender',
 ]
 
 MIDDLEWARE = [
