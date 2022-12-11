@@ -10,6 +10,7 @@ from .serializers import (
     UsernameLoginSerializer,
     UserSignUpSerializer,
     UserLogOutSerializer,
+    GetUsersSerializer,
 )
 
 User = get_user_model()
@@ -96,3 +97,9 @@ class LogOut(generics.GenericAPIView):
     def post(self, request):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class GetUsers(generics.ListAPIView):
+    # permission_classes = [IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = GetUsersSerializer

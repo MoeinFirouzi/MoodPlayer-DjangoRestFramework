@@ -35,3 +35,9 @@ class UserSignUpSerializer(serializers.ModelSerializer):
 
 class UserLogOutSerializer(serializers.Serializer):
     pass
+
+
+class GetUsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "email", "username"]
