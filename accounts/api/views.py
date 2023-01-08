@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .serializers import (
     EmailLoginSerializer,
     UsernameLoginSerializer,
@@ -100,6 +100,10 @@ class LogOut(generics.GenericAPIView):
 
 
 class GetUsers(generics.ListAPIView):
-    # permission_classes = [IsAuthenticated]
+    """
+    Get all users.
+    It will return users' "id", "email", and "username".
+    """
+    permission_classes = [IsAuthenticated, IsAdminUser]
     queryset = User.objects.all()
     serializer_class = GetUsersSerializer
