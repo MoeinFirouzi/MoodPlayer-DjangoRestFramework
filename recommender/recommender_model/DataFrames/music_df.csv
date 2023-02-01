@@ -1,0 +1,95 @@
+id,artist_id,album_id,genre,energy,valence,year,rate
+1,1,1,alternative rock,Too Positive,Neutral,2000,0.5
+2,2,2,r&b,Negative,Too Negative,2018,0.625
+3,3,3,instrumental,Too Negative,Too Negative,2016,0.5
+4,4,4,rock,Neutral,Negative,1973,0.5
+5,5,5,pop,Negative,Neutral,1995,0.125
+6,6,6,pop,Neutral,Neutral,2019,0.25
+7,7,7,r&b,Too Positive,Neutral,2010,0.5
+8,8,8,pop,Neutral,Neutral,2011,0.25
+9,9,9,persian traditional,Neutral,Neutral,2008,0.25
+11,1,11,alternative rock,Too Positive,Too Positive,2012,1.0
+12,9,9,persian traditional,Neutral,Neutral,2008,0.25
+13,9,12,persian traditional,Neutral,Neutral,2009,0.25
+14,31,13,alternative rock,Neutral,Too Negative,2017,0.75
+15,32,14,show tune,Too Negative,Too Negative,2001,0.5
+16,33,15,symphonic metal,Neutral,Too Negative,2019,0.75
+17,34,16,psychedelic rock,Neutral,Neutral,2013,0.25
+18,35,17,pop,Positive,Neutral,2000,0.375
+19,36,18,pop,Positive,Negative,2018,0.625
+20,37,19,pop,Neutral,Neutral,2017,0.25
+21,38,20,alternative/indie,Neutral,Too Negative,2015,0.75
+22,39,21,pop,Negative,Negative,2018,0.375
+23,40,22,pop,Positive,Negative,2015,0.625
+24,41,23,alternative/indie,Positive,Too Positive,2014,0.875
+25,41,24,alternative/indie,Too Positive,Negative,2000,0.75
+26,41,25,alternative rock,Neutral,Negative,2002,0.5
+27,42,26,natural sounds,Too Negative,Too Negative,2013,0.5
+28,42,26,natural sounds,Too Negative,Too Negative,2013,0.5
+29,43,27,alternative/indie,Too Negative,Too Negative,2019,0.5
+30,44,28,metal,Neutral,Negative,2018,0.5
+31,45,29,electronic dance music,Positive,Too Negative,2013,0.875
+32,46,30,reggae,Too Positive,Neutral,2018,0.5
+33,47,31,rock,Neutral,Too Positive,1976,0.75
+34,48,32,funk,Positive,Too Positive,1981,0.875
+35,49,33,pop,Too Positive,Too Positive,2012,1.0
+36,49,33,pop,Too Positive,Too Positive,2012,1.0
+37,49,33,pop,Positive,Too Positive,2012,0.875
+38,50,34,alternative/indie,Too Positive,Neutral,2021,0.5
+39,51,35,maghreb pop,Too Positive,Negative,2020,0.75
+40,52,36,pop,Negative,Neutral,2021,0.125
+41,53,37,r&b/soul,Too Positive,Neutral,2013,0.5
+42,54,38,funk,Positive,Too Positive,2006,0.875
+43,55,39,pop,Neutral,Negative,1990,0.5
+44,56,40,pop-rap,Positive,Too Positive,2011,0.875
+45,57,41,pop,Neutral,Too Positive,1991,0.75
+46,57,41,pop,Neutral,Too Positive,1991,0.75
+47,57,42,pop,Positive,Negative,2014,0.625
+48,58,43,persian traditional,Too Positive,Neutral,2022,0.5
+49,58,44,persian traditional,Negative,Too Negative,2022,0.625
+50,58,45,persian traditional,Positive,Neutral,2021,0.375
+52,59,47,persian traditional,Too Negative,Too Negative,2010,0.5
+53,96,46,persian traditional,Negative,Negative,2003,0.375
+54,61,48,pop,Too Positive,Too Positive,1995,1.0
+60,64,50,arabesque,Too Positive,Too Positive,2012,1.0
+61,65,51,latin urbano,Positive,Too Positive,2021,0.875
+62,66,52,alternative/indie,Too Positive,Neutral,2018,0.5
+63,67,53,alternative/indie,Positive,Too Negative,2021,0.875
+64,67,54,blues rock,Neutral,Negative,2016,0.5
+65,68,55,hip hop,Neutral,Negative,2021,0.5
+66,69,56,alternative/indie,Negative,Too Negative,2013,0.625
+67,70,57,electronic dance music,Positive,Neutral,2021,0.375
+68,71,58,pop,Positive,Too Positive,2008,0.875
+69,71,59,pop,Negative,Negative,2008,0.375
+70,72,60,persian traditional,Negative,Negative,1998,0.375
+71,73,61,persian traditional,Too Positive,Too Positive,1996,1.0
+72,74,62,pop,Positive,Neutral,2022,0.375
+73,75,63,pop,Positive,Too Positive,1994,0.875
+74,76,64,pop,Positive,Neutral,2015,0.375
+75,77,65,pop,Too Positive,Too Positive,2006,1.0
+76,78,66,pop,Negative,Neutral,2019,0.125
+77,79,67,instrumental,Negative,Too Negative,2002,0.625
+78,80,68,pop,Positive,Too Positive,2009,0.875
+81,83,71,pop,Too Negative,Too Negative,2008,0.5
+82,84,72,persian traditional,Neutral,Too Positive,2005,0.75
+83,85,73,pop,Positive,Positive,1991,0.625
+84,86,74,pop,Too Positive,Too Positive,2008,1.0
+85,87,75,pop,Too Positive,Too Positive,2017,1.0
+86,88,76,pop,Positive,Negative,2016,0.625
+87,89,77,pop,Neutral,Negative,1973,0.5
+88,90,78,hard rock,Too Positive,Negative,2016,0.75
+89,91,79,alternative/indie,Negative,Negative,2011,0.375
+90,92,80,alternative/indie,Negative,Too Negative,2014,0.625
+91,93,81,pop,Too Positive,Too Positive,2019,1.0
+92,94,82,pop,Too Negative,Negative,2003,0.25
+93,95,47,persian traditional,Too Negative,Too Negative,2010,0.5
+94,96,46,persian traditional,Negative,Negative,2003,0.375
+95,62,83,persian traditional,Negative,Neutral,2008,0.125
+96,62,84,persian traditional,Neutral,Negative,2003,0.5
+97,62,83,persian traditional,Neutral,Positive,2008,0.5
+98,97,85,folk,Neutral,Too Negative,2012,0.75
+99,98,86,pop,Neutral,Neutral,2008,0.25
+100,98,87,pop,Negative,Too Positive,1993,0.625
+101,99,88,heavy metal,Neutral,Negative,1991,0.5
+102,72,89,persian traditional,Positive,Neutral,1985,0.375
+103,100,90,alternative/indie,Positive,Neutral,1999,0.375
