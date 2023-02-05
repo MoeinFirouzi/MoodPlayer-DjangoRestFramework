@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from accounts.utilities import Adder
 from .serializers import (
     EmailLoginSerializer,
     UsernameLoginSerializer,
@@ -82,6 +83,12 @@ class SignUp(generics.GenericAPIView):
             serializer.save()
 
             user = get_object_or_404(User, email=serializer.validated_data["email"])
+            
+            # add user to csv file in recommender app
+            adder = Adder()
+            adder.add_user(id=user.pk, username=user.username,
+                           email=user.email)
+            
             token, created = Token.objects.get_or_create(user=user)
             data = {"token": token.key, "user_id": user.pk, "created": created}
             return Response(data, status=status.HTTP_200_OK)
