@@ -131,3 +131,6 @@ dmypy.json
 # media dir
 media/
 /.env
+
+# CSV files
+*.csv
