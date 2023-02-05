@@ -1,7 +1,5 @@
-from SubModules.Cleaner import music_cleaner_dataframe, sensor_cleaner_dataframe
-from SubModules.CustomDrivingEvaluation import Evaluator
-from RecommenderSystem import MemoryBased
 import pandas as pd
+import numpy as np
 
 class Adder():
 
@@ -54,4 +52,3 @@ class Adder():
 
         user_df = user_df.set_index('id').sort_values(by='id')
         user_df.to_csv('DataFrames/user_df.csv')
-        return (user_df,rate_df)

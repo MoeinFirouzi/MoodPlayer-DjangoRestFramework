@@ -7,7 +7,7 @@ import pandas as pd
 import torch
 from torch.utils.data import DataLoader
 
-from DrivingEvaluation.network import *
+from recommender.recommender_model.DrivingEvaluation.network import *
 
 class Evaluator():
 
@@ -35,22 +35,35 @@ class Evaluator():
         loader = DataLoader(data, batch_size=len(data), shuffle=False)
         batch = iter(loader).__next__()
         
-        loaded_dict = torch.load('./DrivingEvaluation/network_120_cpu_0.16.pth')
+        loaded_dict = torch.load('recommender/recommender_model/DrivingEvaluation/network_120_cpu_0.16.pth')
         net.load_state_dict(loaded_dict)
 
         output = net(batch.float())
         target = torch.squeeze(output)
 
         if (target.size() == torch.Size([])):
-            return target.item()
+            
+            value = (target.item() + 0.2)
+            if(value > 1):
+                value = 1
+            if(value < 0):
+                value = 0
+            return value
         else:
-            avg = 0
+            summ = 0
             counter = 0
             for i in range(target.size()[0]):
-                avg += target[i].item()
+                summ += target[i].item()
                 counter += 1
-            avg = avg / counter
-            return avg
+            value = summ / counter
+            value = (value + 0.2)
+
+            if(value > 1):
+                value = 1
+            if(value < 0):
+                value = 0
+
+            return value
 
 
 def reshape_to_batch(normal_array,size):
