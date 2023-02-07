@@ -37,41 +37,37 @@ class MemoryBased():
 
         return int(recommended_music.index[0])
 
-    def recommend(self, user_id, session_id):
-        try:
-            user_id = int(user_id)
-            session_id = int(session_id)
+    def recommend(self,user_id, session_id):
 
-            log_df = pd.read_csv(
-                "recommender/recommender_model/DataFrames/Logs/Log_Updater_Score.csv", index_col=0)
-            print(log_df)
-            current_state = log_df.groupby('session_id').get_group(
-                session_id).tail(1)['new_value'].values[0]
+        user_id = int(user_id)
+        session_id = int(session_id)
 
-            user_df = pd.read_csv(
-                'recommender/recommender_model/DataFrames/user_df.csv', index_col=0)
-            neutral_state = user_df['score'].loc[user_id]
+        log_df = pd.read_csv("recommender/recommender_model/DataFrames/Logs/Log_Updater_Score.csv", index_col=0)
+        current_state = log_df.groupby('session_id').get_group(session_id).tail(1)['new_value'].values[0]
 
-            target_state = neutral_state + (neutral_state - current_state)
+        user_df = pd.read_csv('recommender/recommender_model/DataFrames/user_df.csv',index_col=0)
+        neutral_state = user_df['score'].loc[user_id]
 
-            rate_df = pd.read_csv(
-                'recommender/recommender_model/DataFrames/rate_df.csv', index_col=0)
-            recommended_musics = (rate_df.loc[user_id][(
-                target_state - rate_df.loc[user_id]).abs().argsort().values])
-            recommended_music = recommended_musics.head(1)
+        target_state = neutral_state + (neutral_state - current_state)
+        
+        Log_MemoryBased_Recommend = pd.read_csv("recommender/recommender_model/DataFrames/Logs/Log_MemoryBased_Recommend.csv", index_col=0)
 
-            Log_MemoryBased_Recommend = pd.read_csv(
-                "recommender/recommender_model/DataFrames/Logs/Log_MemoryBased_Recommend.csv", index_col=0)
-            input_log_df = pd.DataFrame(np.array([[session_id, user_id, recommended_music.index[0], recommended_music.values[0],
-                                        current_state, neutral_state, target_state]]), columns=Log_MemoryBased_Recommend.columns)
-            Log_MemoryBased_Recommend = pd.concat(
-                (Log_MemoryBased_Recommend, input_log_df))
-            Log_MemoryBased_Recommend.to_csv(
-                "recommender/recommender_model/DataFrames/Logs/Log_MemoryBased_Recommend.csv")
+        last_recommended_songs_array = Log_MemoryBased_Recommend.groupby('session_id').\
+            get_group(session_id)['recommended_music_id'].tail(5).values
+        last_recommended_songs = []
+        for i in last_recommended_songs_array:
+            last_recommended_songs.append(str(i))
+        last_recommended_songs
 
-            return int(recommended_music.index[0])
-        except Exception as e:
-            print(e)
+        rate_df = pd.read_csv('recommender/recommender_model/DataFrames/rate_df.csv', index_col=0)
+        recommended_musics = (rate_df.loc[user_id][(target_state - rate_df.loc[user_id]).abs().argsort().values])
+        recommended_music = recommended_musics.drop(last_recommended_songs).head(1)
+
+        input_log_df = pd.DataFrame(np.array([[session_id, user_id, recommended_music.index[0], recommended_music.values[0], current_state, neutral_state, target_state]]), columns=Log_MemoryBased_Recommend.columns)
+        Log_MemoryBased_Recommend = pd.concat((Log_MemoryBased_Recommend, input_log_df))
+        Log_MemoryBased_Recommend.to_csv("recommender/recommender_model/DataFrames/Logs/Log_MemoryBased_Recommend.csv")
+        
+        return int(recommended_music.index[0])
 
 
 class CollaborativeFiltering():
