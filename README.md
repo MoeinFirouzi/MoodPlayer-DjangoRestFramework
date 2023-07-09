@@ -1,1 +1,2 @@
 # MoodPlayer-DjangoRestFramework
+This project is the web app of a data gathering project about analyzing drivers’ driving status information and their music information. The goal was to recommend music to drivers during driving their cars to improve their driving status. The recommender system has been developed by another developer and my job was transferring music & data between the web app and mobile client apps.
